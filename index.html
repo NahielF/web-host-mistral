@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NebulaHost | Hosting de Alto Rendimiento</title>
+    <meta name="description" content="Hosting web, VPS, servidores cloud y dominios con soporte 24/7. Soluciones escalables para tu negocio.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>NebulaHost</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a href="#caracteristicas">Características</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#contacto" class="btn btn-outline">Contacto</a>
+                <a href="#login" class="btn btn-primary">Iniciar Sesión</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hosting <span class="highlight">Rápido y Seguro</span> 
+                    para tu Negocio
+                </h1>
+                <p class="hero-subtitle">
+                    Soluciones de hosting escalables con soporte 24/7, 
+                    tiempo de actividad del 99.9% y tecnología de vanguardia.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#precios" class="btn btn-primary btn-lg">Ver Planes</a>
+                    <a href="#demo" class="btn btn-outline btn-lg">Prueba Gratis</a>
+                </div>
+                <div class="hero-trust">
+                    <p><i class="fas fa-check-circle"></i> +10,000 clientes satisfechos</p>
+                    <p><i class="fas fa-check-circle"></i> Migración gratuita</p>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="server-illustration">
+                    <div class="server">
+                        <div class="server-rack"></div>
+                        <div class="server-rack"></div>
+                        <div class="server-rack"></div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="floating-card">
+                            <i class="fas fa-bolt"></i>
+                            <span>Alta Velocidad</span>
+                        </div>
+                        <div class="floating-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Seguridad</span>
+                        </div>
+                        <div class="floating-card">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nuestros Servicios</span>
+                <h2 class="section-title">Soluciones de Hosting para <span class="highlight">Cualquier Necesidad</span></h2>
+                <p class="section-subtitle">
+                    Desde pequeños blogs hasta aplicaciones empresariales. 
+                    Tenemos el plan perfecto para ti.
+                </p>
+            </div>
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Hosting Web</h3>
+                    <p>Hosting compartido optimizado para WordPress, Joomla y más. Incluye SSL gratuito y backups diarios.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 10 GB - 100 GB SSD</li>
+                        <li><i class="fas fa-check"></i> Ancho de banda ilimitado</li>
+                        <li><i class="fas fa-check"></i> 1-10 sitios web</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Más Info</a>
+                </article>
+                <article class="service-card featured">
+                    <div class="service-badge">Popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>VPS Cloud</h3>
+                    <p>Servidores privados virtuales con recursos dedicados. Escalable en tiempo real.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 2-16 vCPUs</li>
+                        <li><i class="fas fa-check"></i> 4-64 GB RAM</li>
+                        <li><i class="fas fa-check"></i> 50-500 GB SSD NVMe</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Más Info</a>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Hosting Cloud</h3>
+                    <p>Infraestructura en la nube con balanceo de carga y alta disponibilidad.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Escalabilidad automática</li>
+                        <li><i class="fas fa-check"></i> 99.99% uptime</li>
+                        <li><i class="fas fa-check"></i> Soporte prioritario</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Más Info</a>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-domain"></i>
+                    </div>
+                    <h3>Dominios</h3>
+                    <p>Registra tu dominio con nosotros. Más de 500 extensiones disponibles.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> .com, .net, .es, etc.</li>
+                        <li><i class="fas fa-check"></i> Privacidad WHOIS</li>
+                        <li><i class="fas fa-check"></i> Gestión DNS fácil</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Más Info</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precios Section -->
+    <section id="precios" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Precios Transparentes</span>
+                <h2 class="section-title">Planes de Hosting <span class="highlight">Sin Sorpresas</span></h2>
+                <p class="section-subtitle">
+                    Elige el plan que mejor se adapte a tus necesidades. 
+                    Todos los planes incluyen migración gratuita.
+                </p>
+            </div>
+            <div class="pricing-toggle">
+                <span class="toggle-label">Facturación:</span>
+                <div class="toggle-container">
+                    <button class="toggle-btn active" data-period="monthly">Mensual</button>
+                    <button class="toggle-btn" data-period="yearly">Anual <span class="discount-badge">-20%</span></button>
+                </div>
+            </div>
+            <div class="pricing-grid">
+                <!-- Plan Básico -->
+                <article class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Básico</h3>
+                        <p>Para pequeños proyectos</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount" data-monthly="5.99" data-yearly="4.79">€5.99</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 10 GB Almacenamiento SSD</li>
+                        <li><i class="fas fa-check"></i> 1 Sitio Web</li>
+                        <li><i class="fas fa-check"></i> 100 GB Transferencia</li>
+                        <li><i class="fas fa-check"></i> 1 Base de Datos MySQL</li>
+                        <li><i class="fas fa-check"></i> SSL Gratis</li>
+                        <li><i class="fas fa-check"></i> Backups Semanales</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Dominio Gratis</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Soporte Prioritario</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-full">Contratar</a>
+                </article>
+                
+                <!-- Plan Profesional -->
+                <article class="pricing-card featured">
+                    <div class="pricing-badge">Recomendado</div>
+                    <div class="pricing-header">
+                        <h3>Profesional</h3>
+                        <p>Para negocios en crecimiento</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount" data-monthly="12.99" data-yearly="10.39">€12.99</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 50 GB Almacenamiento SSD</li>
+                        <li><i class="fas fa-check"></i> 5 Sitios Web</li>
+                        <li><i class="fas fa-check"></i> Transferencia Ilimitada</li>
+                        <li><i class="fas fa-check"></i> 10 Bases de Datos MySQL</li>
+                        <li><i class="fas fa-check"></i> SSL Gratis</li>
+                        <li><i class="fas fa-check"></i> Backups Diarios</li>
+                        <li><i class="fas fa-check"></i> 1 Dominio Gratis</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Soporte Prioritario</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-full">Contratar</a>
+                </article>
+                
+                <!-- Plan Empresa -->
+                <article class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Empresa</h3>
+                        <p>Para proyectos exigentes</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount" data-monthly="24.99" data-yearly="19.99">€24.99</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 100 GB Almacenamiento SSD</li>
+                        <li><i class="fas fa-check"></i> Sitios Web Ilimitados</li>
+                        <li><i class="fas fa-check"></i> Transferencia Ilimitada</li>
+                        <li><i class="fas fa-check"></i> Bases de Datos Ilimitadas</li>
+                        <li><i class="fas fa-check"></i> SSL Gratis</li>
+                        <li><i class="fas fa-check"></i> Backups Diarios</li>
+                        <li><i class="fas fa-check"></i> 3 Dominios Gratis</li>
+                        <li><i class="fas fa-check"></i> Soporte Prioritario</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-full">Contratar</a>
+                </article>
+                
+                <!-- Plan VPS -->
+                <article class="pricing-card vps">
+                    <div class="pricing-header">
+                        <h3>VPS Cloud</h3>
+                        <p>Recursos dedicados</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount" data-monthly="29.99" data-yearly="23.99">€29.99</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 4 vCPUs</li>
+                        <li><i class="fas fa-check"></i> 8 GB RAM</li>
+                        <li><i class="fas fa-check"></i> 100 GB SSD NVMe</li>
+                        <li><i class="fas fa-check"></i> 5 TB Transferencia</li>
+                        <li><i class="fas fa-check"></i> IP Dedicada</li>
+                        <li><i class="fas fa-check"></i> Panel de Control</li>
+                        <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                        <li><i class="fas fa-check"></i> Snapshots Automáticos</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-full">Contratar</a>
+                </article>
+            </div>
+            <div class="pricing-note">
+                <p><i class="fas fa-info-circle"></i> Todos los precios están sujetos a IVA. Renueva al mismo precio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características Section -->
+    <section id="caracteristicas" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Tecnología</span>
+                <h2 class="section-title">Características <span class="highlight">Incluidas</span></h2>
+                <p class="section-subtitle">
+                    Todo lo que necesitas para que tu sitio web funcione a la perfección.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Alto Rendimiento</h3>
+                    <p>Servidores optimizados con SSD NVMe y caché avanzada para una velocidad máxima.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Seguridad Robusta</h3>
+                    <p>Protección DDoS, firewalls, escaneo de malware y certificados SSL gratuitos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Disponibilidad 24/7</h3>
+                    <p>Garantizamos un 99.9% de uptime. Monitoreo constante de tus servicios.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Soporte Técnico</h3>
+                    <p>Equipo de expertos disponible 24/7 por chat, teléfono y ticket.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Backups Automáticos</h3>
+                    <p>Copias de seguridad diarias o semanales. Restauración en un clic.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Panel de Control</h3>
+                    <p>cPanel o Plesk incluido. Gestión intuitiva de tus servicios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section id="testimonios" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Clientes</span>
+                <h2 class="section-title">Lo que Dicen <span class="highlight">Nuestros Clientes</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Llevamos 3 años con NebulaHost y no hemos tenido ningún problema. 
+                        El soporte es rápido y siempre resuelven nuestras dudas."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Martínez</h4>
+                            <p>CEO, DigitalSolutions</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Migramos desde otro proveedor y el proceso fue increíblemente fácil. 
+                        Además, nuestro sitio carga el doble de rápido."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Laura Gómez</h4>
+                            <p>Directora de Marketing, TechCorp</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "El plan VPS es perfecto para nuestra aplicación. 
+                        La escalabilidad es sencilla y el rendimiento es excelente."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Javier Rodríguez</h4>
+                            <p>Desarrollador, AppInnovate</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Ayuda</span>
+                <h2 class="section-title">Preguntas <span class="highlight">Frecuentes</span></h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-column">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cómo migro mi sitio a NebulaHost?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ofrecemos migración gratuita desde cualquier proveedor. 
+                               Nuestro equipo técnico se encarga de todo el proceso sin tiempo de inactividad. 
+                               Solo necesitas proporcionarnos los datos de acceso a tu actual hosting.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Qué métodos de pago aceptan?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Aceptamos tarjetas de crédito/débito (Visa, Mastercard), PayPal, 
+                               transferencia bancaria y criptomonedas (Bitcoin, Ethereum).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Puedo actualizar mi plan más adelante?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sí, puedes actualizar o degradar tu plan en cualquier momento desde tu panel de control. 
+                               Los cambios se aplican de forma inmediata y solo pagas la diferencia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-column">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Ofrecen garantía de devolución?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sí, tenemos una garantía de 30 días. Si no estás satisfecho con nuestros servicios, 
+                               te devolvemos el 100% de tu pago sin preguntas.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Dónde están ubicados sus servidores?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nuestros servidores están en centros de datos de primer nivel en 
+                               <strong>Madrid (España)</strong>, <strong>Ámsterdam (Países Bajos)</strong> y 
+                               <strong>Nueva York (EE.UU.)</strong>. Puedes elegir la ubicación al contratar.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cómo contacto con soporte técnico?</h3>
+                            <button class="faq-toggle" aria-label="Abrir respuesta">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Puedes contactarnos 24/7 a través de:
+                               <ul>
+                                   <li>Chat en vivo (respuesta en < 2 minutos)</li>
+                                   <li>Teléfono: +34 900 123 456</li>
+                                   <li>Ticket de soporte (respuesta en < 1 hora)</li>
+                                   <li>Email: soporte@nebulahost.com</li>
+                               </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container cta-container">
+            <div class="cta-content">
+                <span class="section-tag">¿Listo para Empezar?</span>
+                <h2 class="cta-title">Lleva tu Presencia Online al <span class="highlight">Siguiente Nivel</span></h2>
+                <p class="cta-subtitle">
+                    Únete a más de 10,000 clientes que confían en NebulaHost para sus proyectos web.
+                </p>
+            </div>
+            <div class="cta-buttons">
+                <a href="#precios" class="btn btn-primary btn-lg">Ver Planes</a>
+                <a href="#contacto" class="btn btn-outline btn-lg">Hablar con Ventas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="#" class="logo">
+                        <i class="fas fa-cloud"></i>
+                        <span>NebulaHost</span>
+                    </a>
+                    <p class="footer-description">
+                        Hosting de alto rendimiento con soporte 24/7. 
+                        Soluciones escalables para tu negocio.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Hosting</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hosting Web</a></li>
+                        <li><a href="#">VPS Cloud</a></li>
+                        <li><a href="#">Hosting Cloud</a></li>
+                        <li><a href="#">Dominios</a></li>
+                        <li><a href="#">Correo Empresarial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentación</a></li>
+                        <li><a href="#">Tutoriales</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Estado del Servicio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Tecnología 123, Madrid, España</li>
+                        <li><i class="fas fa-phone"></i> +34 900 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@nebulahost.com</li>
+                        <li><i class="fas fa-clock"></i> Soporte 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NebulaHost. Todos los derechos reservados.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-bitcoin"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
