@@ -1,9 +1,200 @@
+// DOM Content Loaded
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    initHeader();
+    initMobileMenu();
+    initPricingToggle();
+    initFAQ();
+    initBackToTop();
+    initScrollAnimations();
+    initSmoothScroll();
+});
+=======
 /**
  * NebulaHost - JavaScript Principal
- * Funcionalidades: FAQ acordeón, toggle de precios, scroll suave, header sticky, etc.
+ * Funcionalidades: FAQ acordeón, toggle de precios, scroll suave, header sticky, animación de partículas, etc.
  */
 
 // ============================================
+// Configuración de la Animación de Partículas
+// ============================================
+const particleConfig = {
+    particleCount: 80,
+    colors: ['#2563eb', '#10b981', '#3b82f6', '#06b6d4', '#8b5cf6'],
+    minSize: 2,
+    maxSize: 6,
+    connectionDistance: 150,
+    connectionOpacity: 0.3,
+    connectionColor: 'rgba(37, 99, 235, 0.2)',
+    speed: 0.5,
+    mouseInfluence: 50
+};
+
+// ============================================
+// Clase ParticleNetwork (Animación de Red de Partículas)
+// ============================================
+class ParticleNetwork {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particles = [];
+        this.mouse = { x: 0, y: 0 };
+        this.width = 0;
+        this.height = 0;
+        this.init();
+        this.bindEvents();
+        this.animate();
+    }
+    
+    init() {
+        this.resize();
+        this.createParticles();
+    }
+    
+    resize() {
+        this.width = this.canvas.width = this.canvas.parentElement.clientWidth;
+        this.height = this.canvas.height = this.canvas.parentElement.clientHeight;
+    }
+    
+    createParticles() {
+        this.particles = [];
+        for (let i = 0; i < particleConfig.particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * this.width,
+                y: Math.random() * this.height,
+                size: Math.random() * (particleConfig.maxSize - particleConfig.minSize) + particleConfig.minSize,
+                color: particleConfig.colors[Math.floor(Math.random() * particleConfig.colors.length)],
+                vx: (Math.random() - 0.5) * particleConfig.speed,
+                vy: (Math.random() - 0.5) * particleConfig.speed,
+                baseX: Math.random() * this.width,
+                baseY: Math.random() * this.height
+            });
+        }
+    }
+    
+    bindEvents() {
+        // Mouse move
+        this.canvas.addEventListener('mousemove', (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            this.mouse.x = e.clientX - rect.left;
+            this.mouse.y = e.clientY - rect.top;
+        });
+        
+        // Resize
+        window.addEventListener('resize', () => {
+            this.resize();
+            this.createParticles();
+        });
+    }
+    
+    drawParticle(particle) {
+        this.ctx.beginPath();
+        this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        this.ctx.fillStyle = particle.color;
+        this.ctx.fill();
+        
+        // Glow effect
+        this.ctx.beginPath();
+        this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+        this.ctx.strokeStyle = particle.color;
+        this.ctx.strokeWidth = 0.5;
+        this.ctx.globalAlpha = 0.3;
+        this.ctx.stroke();
+        this.ctx.globalAlpha = 1;
+    }
+    
+    drawConnection(p1, p2) {
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < particleConfig.connectionDistance) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(p1.x, p1.y);
+            this.ctx.lineTo(p2.x, p2.y);
+            this.ctx.strokeStyle = particleConfig.connectionColor;
+            this.ctx.lineWidth = 0.5;
+            this.ctx.globalAlpha = particleConfig.connectionOpacity * (1 - distance / particleConfig.connectionDistance);
+            this.ctx.stroke();
+            this.ctx.globalAlpha = 1;
+        }
+    }
+    
+    update() {
+        this.particles.forEach(particle => {
+            // Movimiento base con efecto de onda
+            particle.x += particle.vx + Math.sin(Date.now() * 0.001 + particle.baseX * 0.01) * 0.2;
+            particle.y += particle.vy + Math.cos(Date.now() * 0.001 + particle.baseY * 0.01) * 0.2;
+            
+            // Efecto de mouse
+            const dx = this.mouse.x - particle.x;
+            const dy = this.mouse.y - particle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < particleConfig.mouseInfluence) {
+                const force = particleConfig.mouseInfluence / distance;
+                particle.x -= dx / force;
+                particle.y -= dy / force;
+            }
+            
+            // Rebotar en los bordes
+            if (particle.x < 0 || particle.x > this.width) particle.vx *= -1;
+            if (particle.y < 0 || particle.y > this.height) particle.vy *= -1;
+            
+            // Volver a la posición base lentamente
+            particle.x = particle.x * 0.98 + particle.baseX * 0.02;
+            particle.y = particle.y * 0.98 + particle.baseY * 0.02;
+        });
+    }
+    
+    draw() {
+        // Limpiar canvas
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        
+        // Dibujar conexiones
+        for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+                this.drawConnection(this.particles[i], this.particles[j]);
+            }
+        }
+        
+        // Dibujar partículas
+        this.particles.forEach(particle => this.drawParticle(particle));
+    }
+    
+    animate() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// ============================================
+// DOM Content Loaded
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    initHeader();
+    initMobileMenu();
+    initPricingToggle();
+    initFAQ();
+    initBackToTop();
+    initScrollAnimations();
+    initSmoothScroll();
+    initParticleNetwork();
+});
+
+// ============================================
+// Inicializar Animación de Partículas
+// ============================================
+function initParticleNetwork() {
+    const canvas = document.getElementById('particleCanvas');
+    if (canvas) {
+        // Esperar a que el canvas tenga tamaño
+        setTimeout(() => {
+            new ParticleNetwork(canvas);
+        }, 100);
+    }
+}============================================
 // DOM Content Loaded
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {

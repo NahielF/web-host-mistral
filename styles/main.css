@@ -1,4 +1,305 @@
+   Hero Section
+   ============================================ */
+.hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--gray-900);
+}
+
+.hero-title .highlight {
+    color: var(--primary-color);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--gray-600);
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.hero-trust {
+    display: flex;
+    gap: 25px;
+}
+
+.hero-trust p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-size-sm);
+    color: var(--gray-500);
+}
+
+.hero-trust i {
+    color: var(--secondary-color);
+}
+
+   Secciones Generales
+   ============================================ */
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-radius: var(--border-radius-xl);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+=======
+   Botones
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    transition: var(--transition-fast);
+}
+=======
 /* ============================================
+   Botones
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    transition: var(--transition-fast);
+    font-family: var(--font-mono);
+}============================================
+   Secciones Generales
+   ============================================ */
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-radius: var(--border-radius-xl);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+}Hero Image */
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.server-illustration {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.server {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.server-rack {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(90deg, var(--gray-200) 0%, var(--gray-300) 100%);
+    border-radius: var(--border-radius-md);
+    position: relative;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.server-rack::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    box-shadow: 15px 0 0 var(--primary-color), 30px 0 0 var(--secondary-color);
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.floating-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-lg);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.floating-card i {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+}
+
+.floating-card:nth-child(1) {
+    transform: translateX(20px);
+}
+
+.floating-card:nth-child(2) {
+    transform: translateX(40px);
+}
+
+.floating-card:nth-child(3) {
+    transform: translateX(60px);
+}
+=======
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, var(--gray-900) 0%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+#particleCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--white);
+    font-family: var(--font-mono);
+    letter-spacing: -1px;
+}
+
+.hero-title .highlight {
+    color: var(--primary-color);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    max-width: 500px;
+    font-family: var(--font-mono);
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons .btn {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.hero-trust {
+    display: flex;
+    gap: 25px;
+}
+
+.hero-trust p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+}
+
+.hero-trust i {
+    color: var(--secondary-color);
+}============================================
    NebulaHost - Estilos Principales
    ============================================ */
 
@@ -33,6 +334,7 @@
     
     /* Tipografía */
     --font-family: 'Inter', sans-serif;
+    --font-mono: 'Space Mono', monospace;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
     --font-size-lg: 1.125rem;
@@ -146,6 +448,7 @@ button {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--primary-color);
+    font-family: var(--font-mono);
 }
 
 .logo i {
@@ -418,10 +721,11 @@ button {
 
 .section-title {
     font-size: var(--font-size-4xl);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
     margin-bottom: 15px;
     color: var(--gray-900);
+    font-family: var(--font-mono);
 }
 
 .section-title .highlight {
@@ -509,6 +813,7 @@ button {
     font-weight: 700;
     margin-bottom: 15px;
     color: var(--gray-900);
+    font-family: var(--font-mono);
 }
 
 .service-card p {
@@ -649,11 +954,13 @@ button {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--gray-900);
+    font-family: var(--font-mono);
 }
 
 .pricing-header p {
     font-size: var(--font-size-sm);
     color: var(--gray-500);
+    font-family: var(--font-mono);
 }
 
 .pricing-price {
@@ -662,8 +969,9 @@ button {
 
 .price-amount {
     font-size: var(--font-size-4xl);
-    font-weight: 800;
+    font-weight: 700;
     color: var(--primary-color);
+    font-family: var(--font-mono);
 }
 
 .price-period {
@@ -768,6 +1076,7 @@ button {
     font-weight: 700;
     margin-bottom: 10px;
     color: var(--gray-900);
+    font-family: var(--font-mono);
 }
 
 .feature-card p {
@@ -793,15 +1102,17 @@ button {
 
 .testimonial-card {
     padding: 30px;
-    background-color: var(--white);
+    background-color: var(--gray-800);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--box-shadow-md);
     transition: var(--transition-base);
+    border: 1px solid var(--gray-700);
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-xl);
+    border-color: var(--primary-color);
 }
 
 .testimonial-rating {
@@ -812,10 +1123,11 @@ button {
 
 .testimonial-text {
     font-size: var(--font-size-base);
-    color: var(--gray-700);
+    color: var(--gray-300);
     line-height: 1.7;
     margin-bottom: 25px;
     font-style: italic;
+    font-family: var(--font-mono);
 }
 
 .testimonial-author {
@@ -839,12 +1151,14 @@ button {
 .author-info h4 {
     font-size: var(--font-size-base);
     font-weight: 600;
-    color: var(--gray-900);
+    color: var(--white);
+    font-family: var(--font-mono);
 }
 
 .author-info p {
     font-size: var(--font-size-sm);
-    color: var(--gray-500);
+    color: var(--gray-400);
+    font-family: var(--font-mono);
 }
 
 /* ============================================
@@ -887,6 +1201,7 @@ button {
     font-size: var(--font-size-lg);
     font-weight: 600;
     color: var(--gray-900);
+    font-family: var(--font-mono);
 }
 
 .faq-toggle {
@@ -959,9 +1274,10 @@ button {
 
 .cta-title {
     font-size: var(--font-size-4xl);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
     color: var(--white);
+    font-family: var(--font-mono);
 }
 
 .cta-title .highlight {
@@ -972,6 +1288,7 @@ button {
     font-size: var(--font-size-lg);
     color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
+    font-family: var(--font-mono);
 }
 
 .cta-buttons {
