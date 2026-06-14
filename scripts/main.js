@@ -1,15 +1,3 @@
-// DOM Content Loaded
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    initHeader();
-    initMobileMenu();
-    initPricingToggle();
-    initFAQ();
-    initBackToTop();
-    initScrollAnimations();
-    initSmoothScroll();
-});
-=======
 /**
  * NebulaHost - JavaScript Principal
  * Funcionalidades: FAQ acordeón, toggle de precios, scroll suave, header sticky, animación de partículas, etc.
@@ -19,15 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // Configuración de la Animación de Partículas
 // ============================================
 const particleConfig = {
-    particleCount: 80,
+    particleCount: 60,          // Reducido para mejor rendimiento
     colors: ['#2563eb', '#10b981', '#3b82f6', '#06b6d4', '#8b5cf6'],
-    minSize: 2,
-    maxSize: 6,
-    connectionDistance: 150,
-    connectionOpacity: 0.3,
-    connectionColor: 'rgba(37, 99, 235, 0.2)',
-    speed: 0.5,
-    mouseInfluence: 50
+    minSize: 1.5,
+    maxSize: 4,
+    connectionDistance: 120,    // Reducido para menos conexiones
+    connectionOpacity: 0.2,
+    connectionColor: 'rgba(37, 99, 235, 0.15)',
+    speed: 0.3,
+    mouseInfluence: 40,
+    density: 0.5               // Para ajustar densidad en móviles
 };
 
 // ============================================
@@ -38,27 +27,40 @@ class ParticleNetwork {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.particles = [];
-        this.mouse = { x: 0, y: 0 };
+        this.mouse = { x: null, y: null };
+        this.touch = { x: null, y: null };
         this.width = 0;
         this.height = 0;
+        this.animationId = null;
+        this.lastTime = 0;
         this.init();
-        this.bindEvents();
-        this.animate();
     }
     
     init() {
         this.resize();
         this.createParticles();
+        this.bindEvents();
+        this.startAnimation();
     }
     
     resize() {
-        this.width = this.canvas.width = this.canvas.parentElement.clientWidth;
-        this.height = this.canvas.height = this.canvas.parentElement.clientHeight;
+        if (!this.canvas.parentElement) return;
+        this.width = this.canvas.parentElement.clientWidth;
+        this.height = this.canvas.parentElement.clientHeight;
+        
+        // Usar devicePixelRatio para alta resolución
+        const dpr = window.devicePixelRatio || 1;
+        this.canvas.width = this.width * dpr;
+        this.canvas.height = this.height * dpr;
+        this.canvas.style.width = `${this.width}px`;
+        this.canvas.style.height = `${this.height}px`;
+        this.ctx.scale(dpr, dpr);
     }
     
     createParticles() {
         this.particles = [];
-        for (let i = 0; i < particleConfig.particleCount; i++) {
+        const count = Math.floor(particleConfig.particleCount * particleConfig.density);
+        for (let i = 0; i < count; i++) {
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -80,10 +82,43 @@ class ParticleNetwork {
             this.mouse.y = e.clientY - rect.top;
         });
         
-        // Resize
+        // Mouse leave
+        this.canvas.addEventListener('mouseleave', () => {
+            this.mouse.x = null;
+            this.mouse.y = null;
+        });
+        
+        // Touch support
+        this.canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = this.canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            this.touch.x = touch.clientX - rect.left;
+            this.touch.y = touch.clientY - rect.top;
+        });
+        
+        this.canvas.addEventListener('touchend', () => {
+            this.touch.x = null;
+            this.touch.y = null;
+        });
+        
+        // Resize con debounce
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            this.resize();
-            this.createParticles();
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.resize();
+                this.createParticles();
+            }, 250);
+        });
+        
+        // Visibilidad de la página
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.stopAnimation();
+            } else {
+                this.startAnimation();
+            }
         });
     }
     
@@ -95,10 +130,10 @@ class ParticleNetwork {
         
         // Glow effect
         this.ctx.beginPath();
-        this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+        this.ctx.arc(particle.x, particle.y, particle.size * 1.5, 0, Math.PI * 2);
         this.ctx.strokeStyle = particle.color;
-        this.ctx.strokeWidth = 0.5;
-        this.ctx.globalAlpha = 0.3;
+        this.ctx.strokeWidth = 0.3;
+        this.ctx.globalAlpha = 0.2;
         this.ctx.stroke();
         this.ctx.globalAlpha = 1;
     }
@@ -113,45 +148,63 @@ class ParticleNetwork {
             this.ctx.moveTo(p1.x, p1.y);
             this.ctx.lineTo(p2.x, p2.y);
             this.ctx.strokeStyle = particleConfig.connectionColor;
-            this.ctx.lineWidth = 0.5;
+            this.ctx.lineWidth = 0.3;
             this.ctx.globalAlpha = particleConfig.connectionOpacity * (1 - distance / particleConfig.connectionDistance);
             this.ctx.stroke();
             this.ctx.globalAlpha = 1;
         }
     }
     
-    update() {
+    update(timeElapsed) {
+        const mouse = this.mouse.x !== null ? this.mouse : this.touch;
+        
         this.particles.forEach(particle => {
-            // Movimiento base con efecto de onda
-            particle.x += particle.vx + Math.sin(Date.now() * 0.001 + particle.baseX * 0.01) * 0.2;
-            particle.y += particle.vy + Math.cos(Date.now() * 0.001 + particle.baseY * 0.01) * 0.2;
+            // Movimiento base con efecto de onda suave
+            particle.x += particle.vx + Math.sin(timeElapsed * 0.0005 + particle.baseX * 0.01) * 0.15;
+            particle.y += particle.vy + Math.cos(timeElapsed * 0.0005 + particle.baseY * 0.01) * 0.15;
             
-            // Efecto de mouse
-            const dx = this.mouse.x - particle.x;
-            const dy = this.mouse.y - particle.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < particleConfig.mouseInfluence) {
-                const force = particleConfig.mouseInfluence / distance;
-                particle.x -= dx / force;
-                particle.y -= dy / force;
+            // Efecto de mouse/touch
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = mouse.x - particle.x;
+                const dy = mouse.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < particleConfig.mouseInfluence) {
+                    const force = (particleConfig.mouseInfluence - distance) / particleConfig.mouseInfluence;
+                    particle.x -= dx * force * 0.1;
+                    particle.y -= dy * force * 0.1;
+                }
             }
             
-            // Rebotar en los bordes
-            if (particle.x < 0 || particle.x > this.width) particle.vx *= -1;
-            if (particle.y < 0 || particle.y > this.height) particle.vy *= -1;
+            // Rebotar en los bordes con amortiguación
+            if (particle.x < 0) {
+                particle.x = 0;
+                particle.vx *= -0.7;
+            } else if (particle.x > this.width) {
+                particle.x = this.width;
+                particle.vx *= -0.7;
+            }
             
-            // Volver a la posición base lentamente
-            particle.x = particle.x * 0.98 + particle.baseX * 0.02;
-            particle.y = particle.y * 0.98 + particle.baseY * 0.02;
+            if (particle.y < 0) {
+                particle.y = 0;
+                particle.vy *= -0.7;
+            } else if (particle.y > this.height) {
+                particle.y = this.height;
+                particle.vy *= -0.7;
+            }
+            
+            // Volver a la posición base lentamente (efecto de gravedad)
+            particle.x = particle.x * 0.99 + particle.baseX * 0.01;
+            particle.y = particle.y * 0.99 + particle.baseY * 0.01;
         });
     }
     
     draw() {
-        // Limpiar canvas
-        this.ctx.clearRect(0, 0, this.width, this.height);
+        // Limpiar canvas con color de fondo
+        this.ctx.fillStyle = 'rgba(15, 23, 42, 0.3)';
+        this.ctx.fillRect(0, 0, this.width, this.height);
         
-        // Dibujar conexiones
+        // Dibujar conexiones (optimizado: solo calcular una vez por frame)
         for (let i = 0; i < this.particles.length; i++) {
             for (let j = i + 1; j < this.particles.length; j++) {
                 this.drawConnection(this.particles[i], this.particles[j]);
@@ -162,10 +215,34 @@ class ParticleNetwork {
         this.particles.forEach(particle => this.drawParticle(particle));
     }
     
-    animate() {
-        this.update();
-        this.draw();
-        requestAnimationFrame(() => this.animate());
+    startAnimation() {
+        if (this.animationId) return;
+        this.lastTime = performance.now();
+        const animate = (currentTime) => {
+            const timeElapsed = currentTime - this.lastTime;
+            this.lastTime = currentTime;
+            
+            this.update(timeElapsed);
+            this.draw();
+            this.animationId = requestAnimationFrame(animate);
+        };
+        this.animationId = requestAnimationFrame(animate);
+    }
+    
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    }
+    
+    destroy() {
+        this.stopAnimation();
+        this.canvas.removeEventListener('mousemove', this.handleMouseMove);
+        this.canvas.removeEventListener('mouseleave', this.handleMouseLeave);
+        this.canvas.removeEventListener('touchmove', this.handleTouchMove);
+        this.canvas.removeEventListener('touchend', this.handleTouchEnd);
+        window.removeEventListener('resize', this.handleResize);
     }
 }
 
@@ -189,29 +266,29 @@ document.addEventListener('DOMContentLoaded', () => {
 function initParticleNetwork() {
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
-        // Esperar a que el canvas tenga tamaño
-        setTimeout(() => {
-            new ParticleNetwork(canvas);
-        }, 100);
+        // Asegurar que el contenedor tenga tamaño
+        const container = canvas.parentElement;
+        if (container) {
+            container.style.position = 'absolute';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+        }
+        
+        // Inicializar con un pequeño delay para evitar problemas de carga
+        requestAnimationFrame(() => {
+            window.particleNetwork = new ParticleNetwork(canvas);
+        });
     }
-}============================================
-// DOM Content Loaded
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    initHeader();
-    initMobileMenu();
-    initPricingToggle();
-    initFAQ();
-    initBackToTop();
-    initScrollAnimations();
-    initSmoothScroll();
-});
+}
 
 // ============================================
 // Header Sticky
 // ============================================
 function initHeader() {
     const header = document.querySelector('.header');
+    if (!header) return;
     
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -228,7 +305,6 @@ function initHeader() {
 function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navList = document.querySelector('.nav-list');
-    const header = document.querySelector('.header');
     
     if (!mobileMenuBtn || !navList) return;
     
@@ -267,11 +343,9 @@ function initPricingToggle() {
     
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Actualizar estado de los botones
             toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            // Actualizar precios
             const period = btn.dataset.period;
             priceAmounts.forEach(amount => {
                 amount.textContent = amount.dataset[period];
@@ -296,14 +370,12 @@ function initFAQ() {
         question.addEventListener('click', () => {
             const isActive = answer.classList.contains('active');
             
-            // Cerrar todas las respuestas
             faqItems.forEach(i => {
                 i.querySelector('.faq-answer')?.classList.remove('active');
                 i.querySelector('.faq-toggle i')?.classList.remove('fa-minus');
                 i.querySelector('.faq-toggle i')?.classList.add('fa-plus');
             });
             
-            // Abrir/Cerrar la respuesta actual
             if (!isActive) {
                 answer.classList.add('active');
                 toggle.querySelector('i').classList.remove('fa-plus');
@@ -318,7 +390,6 @@ function initFAQ() {
 // ============================================
 function initBackToTop() {
     const backToTopBtn = document.querySelector('.back-to-top');
-    
     if (!backToTopBtn) return;
     
     window.addEventListener('scroll', () => {
@@ -345,10 +416,12 @@ function initScrollAnimations() {
         '.service-card, .pricing-card, .feature-card, .testimonial-card, .section-header'
     );
     
+    if (!animatedElements.length) return;
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-on-scroll', 'animated');
+                entry.target.classList.add('animated');
             }
         });
     }, {
@@ -386,86 +459,7 @@ function initSmoothScroll() {
 }
 
 // ============================================
-// Animación de contador (opcional para estadísticas)
+// Consola de bienvenida
 // ============================================
-function animateCounter(element, target, duration = 2000) {
-    let current = 0;
-    const increment = target / (duration / 16);
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target.toLocaleString();
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current).toLocaleString();
-        }
-    }, 16);
-}
-
-// ============================================
-// Inicializar animaciones al hacer scroll
-// ============================================
-window.addEventListener('scroll', () => {
-    // Puedes añadir más animaciones aquí si es necesario
-});
-
-// ============================================
-// Función para mostrar notificaciones (opcional)
-// ============================================
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-        <span>${message}</span>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
-}
-
-// ============================================
-// Validación de formulario (si se añade en el futuro)
-// ============================================
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = '#ef4444';
-        } else {
-            input.style.borderColor = '';
-        }
-    });
-    
-    return isValid;
-}
-
-// ============================================
-// Event Listeners para botones de contacto
-// ============================================
-document.addEventListener('click', (e) => {
-    // Ejemplo: Trackear clics en botones de "Contratar"
-    if (e.target.closest('.btn') && e.target.closest('.pricing-card')) {
-        const planName = e.target.closest('.pricing-card').querySelector('h3')?.textContent || 'Plan';
-        console.log(`Clic en Contratar: ${planName}`);
-        // Aquí podrías enviar un evento a Google Analytics
-    }
-});
-
-// ============================================
-// Consola de bienvenida (opcional)
-// ============================================
-console.log('%c🚀 NebulaHost', 'color: #2563eb; font-size: 20px; font-weight: bold;');
-console.log('%cHosting de Alto Rendimiento', 'color: #10b981; font-size: 14px;');
+console.log('%c🚀 NebulaHost', 'color: #2563eb; font-size: 20px; font-weight: bold; font-family: "Space Mono", monospace;');
+console.log('%cHosting de Alto Rendimiento', 'color: #10b981; font-size: 14px; font-family: "Space Mono", monospace;');
